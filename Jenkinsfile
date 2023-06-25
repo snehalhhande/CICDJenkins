@@ -14,13 +14,7 @@ pipeline {
                 sh 'ls -la'
             }
         }
-		stage('Stop running Container') {
-			steps{
-					sh returnStatus: true, script: 'docker stop $(docker ps -a | grep ${JOB_NAME} | awk \'{print $1}\')'
-					sh returnStatus: true, script: 'docker rmi $(docker images | grep ${registry} | awk \'{print $3}\') --force' 
-					sh returnStatus: true, script: 'docker rm ${JOB_NAME}'
-				}	
-		}
+		
         stage('Build') {
             steps {
 				echo "Building our image"
