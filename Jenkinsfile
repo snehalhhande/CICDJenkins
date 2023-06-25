@@ -1,16 +1,16 @@
 pipeline {
-    agent { label 'master' }
+    agent any
    
 	environment {
-		registry = "kss7/dotnetapp"
+		registry = "snehalhhande/CICDJenkins"
 		img = "$registry" + ":${env.BUILD_ID}"
-		registryCredential = 'docker-hub-login' 
+		//registryCredential = 'docker-hub-login' 
     }	
 
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'dotnetwebapp', url: 'https://github.com/kss7/CICDJenkins.git'
+                git branch: 'dotnetwebapp', url: 'https://github.com/snehalhhande/CICDJenkins.git'
                 sh 'ls -la'
             }
         }
@@ -29,22 +29,8 @@ pipeline {
                 }
             }
         }
-		stage('Run') {
-			steps{
-				echo "Run image"
-				sh returnStdout: true, script: "docker run --rm -d --name ${JOB_NAME} -p 8081:5000 ${img}"
-			}
-		}
-		stage('Release') {
-            steps {
-				script {
-					echo "Push to docker hub"
-                    docker.withRegistry( 'https://registry.hub.docker.com ', registryCredential )  {
-							dockerImg.push()
-							dockerImg.push('latest') //one more push for latest tag
-						}
-                }
-            }
-        }
+		
+          
+      
     }
 }
