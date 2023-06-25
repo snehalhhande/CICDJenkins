@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'dotnetwebapp', url: 'https://github.com/snehalhhande/CICDJenkins.git'
+                git branch: 'main', url: 'https://github.com/snehalhhande/CICDJenkins.git'
                 sh 'ls -la'
             }
         }
