@@ -2,7 +2,7 @@ pipeline {
     agent any
    
 	environment {
-		registry = "snehalhhande/CICDJenkins"
+		registry = "snehalhhande/cicdjenkins"
 		img = "$registry" + ":${env.BUILD_ID}"
 		//registryCredential = 'docker-hub-login' 
     }	
@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/snehalhhande/CICDJenkins.git'
+                git branch: 'main', url: 'https://github.com/snehalhhande/cicdjenkins.git'
                 sh 'ls -la'
             }
         }
