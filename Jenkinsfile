@@ -17,7 +17,7 @@ pipeline {
 
         stage('Stop running Container') {
 			steps{
-                echo ${JOB_NAME}
+                echo "${JOB_NAME}"
 					sh returnStatus: true, script: 'docker stop $(docker ps -a | grep ${JOB_NAME} | awk \'{print $1}\')'
 					sh returnStatus: true, script: 'docker rmi $(docker images | grep ${registry} | awk \'{print $3}\') --force' 
 					sh returnStatus: true, script: 'docker rm ${JOB_NAME}'
